@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 114220238630198244}
   - component: {fileID: 114539644739478522}
   - component: {fileID: 114413587100065256}
+  - component: {fileID: 114631479631010618}
+  - component: {fileID: 82855760691661262}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -440,7 +442,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359953886027096}
   m_LocalRotation: {x: 1.9973712e-21, y: -0.00000035762793, z: 5.5850536e-15, w: 1}
-  m_LocalPosition: {x: 0, y: -2.82, z: -0.9}
+  m_LocalPosition: {x: 0, y: -2.82, z: -22.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4771369484170014}
@@ -507,7 +509,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520066841264898}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 23.88, y: 3.02, z: -36.07}
+  m_LocalPosition: {x: 29.07, y: 0.02, z: 0.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271211182433360}
@@ -644,6 +646,101 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!82 &82855760691661262
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520066841264898}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.117
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95624658660283122
 Animator:
   serializedVersion: 3
@@ -685,14 +782,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9268856d129aa64a8ab4590ce181c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer: 10
   maxHealthPoints: 800
-  damagePerHit: 50
-  minTimeBetweenHits: 0.5
-  maxAttackRange: 2
-  weaponInUse: {fileID: 11400000, guid: fb90a706a8f13334195524a44572cd13, type: 2}
+  baseDamage: 10
+  weaponInUse: {fileID: 11400000, guid: 42b20c93823e4e345ab656322c4f0316, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: dccdb2e2534dec14994b5512b04f67a2,
     type: 2}
+  damageSounds:
+  - {fileID: 8300000, guid: fe2d9c0c96515ea43849abccdfc3c9cc, type: 3}
+  - {fileID: 8300000, guid: ce0eacf16b36a3a46b6b356693ef367f, type: 3}
+  - {fileID: 8300000, guid: 555e70381223ec6499cac890627f118a, type: 3}
+  - {fileID: 8300000, guid: 6d53d5d98edae374fbb12c261a4d6ab9, type: 3}
+  - {fileID: 8300000, guid: 72204e9a8b3c08342b5434e05498dd3a, type: 3}
+  - {fileID: 8300000, guid: 0c9e2c97961adf84a83b5dac7d7d655d, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: f8a93b3bb3d835543886d31e0f93dc03, type: 3}
+  - {fileID: 8300000, guid: d8ebd69df9a3216469749910a4074e81, type: 3}
+  - {fileID: 8300000, guid: 2489f4640dc561643a4aabc3d754a8bd, type: 3}
+  abilities:
+  - {fileID: 11400000, guid: 9818ad5fd98bcb44992ab8ef215e60b9, type: 2}
+  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
 --- !u!114 &114539644739478522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,6 +812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb75cb33cc6f884db40fe6cec105d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114631479631010618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520066841264898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26578b0367858154ba13f8d3875ba1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyOrb: {fileID: 0}
+  maxEnergyPoints: 100
+  regenPointsPerSecond: 3
 --- !u!114 &114730543853140524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -740,10 +862,10 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520066841264898}
-  m_Material: {fileID: 13400000, guid: 52baaeb214519f347a35cf0edfd262ff, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3161108
+  m_Radius: 0.2
   m_Height: 2.11
   m_Direction: 1
   m_Center: {x: 0, y: 0.99, z: -0.016110778}
@@ -764,7 +886,7 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: bd380be6b5701e84b8eb5d0461891480, type: 2}
   - {fileID: 2100000, guid: a2a2d454ec51a9d47a86f44567ab1058, type: 2}
-  - {fileID: 2100000, guid: e0459f3145339894c93f0fc8a5470fb6, type: 2}
+  - {fileID: 2100000, guid: 4b601571f01d9af499fd2c1f87643781, type: 2}
   - {fileID: 2100000, guid: 11311a523de4d9e49b1de5ba66d6f426, type: 2}
   - {fileID: 2100000, guid: f66666e47b4326e458fbbf6308366a51, type: 2}
   m_StaticBatchInfo:
@@ -824,9 +946,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 1520066841264898}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 1
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1.5

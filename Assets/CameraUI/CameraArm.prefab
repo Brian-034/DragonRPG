@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1443800712202558}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1443800712202558
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4581169557807284}
   - component: {fileID: 114740760650760254}
@@ -30,16 +30,16 @@ GameObject:
 --- !u!1 &1748525561977032
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4283510136544572}
   - component: {fileID: 20338169408864780}
   - component: {fileID: 124051341565654092}
   - component: {fileID: 81898678476864740}
-  - component: {fileID: 114285437772518212}
   - component: {fileID: 114471681683313962}
+  - component: {fileID: 114083889026358342}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -50,7 +50,7 @@ GameObject:
 --- !u!4 &4283510136544572
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_LocalRotation: {x: 0.35441664, y: -0.45508924, z: 0.19959645, w: 0.7921136}
@@ -63,7 +63,7 @@ Transform:
 --- !u!4 &4581169557807284
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1443800712202558}
   m_LocalRotation: {x: -0, y: 0.34841037, z: -0, w: 0.93734217}
@@ -77,13 +77,17 @@ Transform:
 --- !u!20 &20338169408864780
 Camera:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -113,14 +117,14 @@ Camera:
 --- !u!81 &81898678476864740
 AudioListener:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_Enabled: 1
---- !u!114 &114285437772518212
+--- !u!114 &114083889026358342
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_Enabled: 1
@@ -128,11 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 0a00000009000000
+  layerPriorities: 00000000
+  walkCursor: {fileID: 2800000, guid: 6aaa95ac56456b3468caac2f0dcc344a, type: 3}
+  enemyCursor: {fileID: 2800000, guid: d9c16f1a0df648e45b02934c28754d59, type: 3}
+  cursorHotspot: {x: 0, y: 0}
 --- !u!114 &114471681683313962
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_Enabled: 1
@@ -140,14 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f83d710eebbbca438a7ce04015996df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkCursor: {fileID: 2800000, guid: 6aaa95ac56456b3468caac2f0dcc344a, type: 3}
   unknownCursor: {fileID: 2800000, guid: 22b0d0abbfc16724fb7d56aac4b6f934, type: 3}
   targetCursor: {fileID: 2800000, guid: d9c16f1a0df648e45b02934c28754d59, type: 3}
   cursorHotspot: {x: 0, y: 0}
 --- !u!114 &114740760650760254
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1443800712202558}
   m_Enabled: 1
@@ -158,7 +164,7 @@ MonoBehaviour:
 --- !u!124 &124051341565654092
 Behaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
   m_Enabled: 1

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
 using UnityEngine.AI;
 using RPG.CameraUI;
 
@@ -16,10 +15,6 @@ namespace RPG.Characters
         AICharacterControl aiCharacterControl = null;
         GameObject walkTarget = null;
 
-        // TODO solve fight between serialize and const
-        [SerializeField] const int walkableLayerNumber = 9;
-        [SerializeField] const int enemyLayerNumber = 10;
-
         bool isInDirectMode = false;
 
         void Start()
@@ -29,30 +24,30 @@ namespace RPG.Characters
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+
+            cameraRaycaster.onMouseOverPotentaillyWalkable += MovePlayer;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
         }
 
-
-        void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        void MovePlayer(Vector3 Destination)
         {
-            switch (layerHit)
+            if (Input.GetMouseButton(0))
             {
-                case enemyLayerNumber:
-                    // navigate to the enemy
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-                case walkableLayerNumber:
-                    // navigate to point on the ground
-                    walkTarget.transform.position = raycastHit.point;
-                    aiCharacterControl.SetTarget(walkTarget.transform);
-                    break;
-                default:
-                    Debug.LogWarning("Don't know how to handle mouse click for player movement");
-                    return;
+                walkTarget.transform.position = Destination;
+                aiCharacterControl.SetTarget(walkTarget.transform);
             }
         }
 
+        void OnMouseOverEnemy(Enemy enemy)
+        {
+            if (Input.GetMouseButton(0)  || Input.GetMouseButtonDown(1))
+            {
+                aiCharacterControl.SetTarget(enemy.transform);
+            }
+
+        }
+
+  
         // TODO make this get called again
         void ProcessDirectMovement()
         {

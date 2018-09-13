@@ -1,2 +1,4 @@
 E:\Repos\Unity\DragonRPG\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
 E:\Repos\Unity\DragonRPG\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+E:\Repos\Unity\DragonRGGV2-master\DragonRPG\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
+E:\Repos\Unity\DragonRGGV2-master\DragonRPG\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache

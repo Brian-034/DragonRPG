@@ -3,7 +3,7 @@ using UnityEngine;
 using RPG.CameraUI;
 using RPG.Characters;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
+namespace RPG.Characters
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
     [RequireComponent(typeof (ThirdPersonCharacter))]
@@ -32,17 +32,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 agent.SetDestination(target.position);
 
                 if (agent.remainingDistance > agent.stoppingDistance)
-                    character.Move(agent.desiredVelocity, false, false);
-                else
-                    character.Move(Vector3.zero, false, false);
+                {
+                   character.Move(agent.desiredVelocity, false, false);
+                }
+                 else
+                {
+                    if (GetComponent<Enemy>())
+                    {
+                        agent.velocity = Vector3.zero;
+                    }                    
+                     character.Move(Vector3.zero, false, false);
+                }
              }
         }
 
 
         public void SetTarget(Transform target)
         {
-            Debug.Log("Target in ai");
-            this.target = target;
+             this.target = target;
         }
     }
 }

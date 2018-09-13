@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
+﻿using UnityEngine;
 using RPG.Core;
 using RPG.Weapons;
 
@@ -13,20 +10,21 @@ namespace RPG.Characters
         [SerializeField] float attackRadius = 5f;
         [SerializeField] float chaseRadius = 2f;
         [SerializeField] float damagePerShot = 9f;
-        [SerializeField] float secondsBetweenShots = 0.5f;
+        [SerializeField] float firingPeriodInSec = 0.5f;
+        [SerializeField] float firingPeriodVariation = 0.1f;
         [SerializeField] GameObject projectileToUse;
         [SerializeField] GameObject projectileSocket;
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
         ThirdPersonCharacter thirdPersonCharacter;
         AICharacterControl aiCharacterControl;
-        GameObject player = null;
+        Player player = null;
         bool isAttacking = false;
         float currentHealthPoints;
 
         void Start()
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = FindObjectOfType<Player>();
             thirdPersonCharacter = player.GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = gameObject.GetComponent<AICharacterControl>();
             currentHealthPoints = maxHealthPoints;
@@ -34,12 +32,17 @@ namespace RPG.Characters
 
         void Update()
         {
+            if (player.healthAsPercentage <= Mathf.Epsilon)
+            {
+                StopAllCoroutines();
+                Destroy(this);
+            }
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-
-                InvokeRepeating("SpawnProjectiles", 0, secondsBetweenShots);
+                float randomizedDelay = Random.Range(firingPeriodInSec - firingPeriodVariation, firingPeriodInSec + firingPeriodVariation);
+                InvokeRepeating("SpawnProjectiles", 0, randomizedDelay);
             }
             if (distanceToPlayer > attackRadius)
             {

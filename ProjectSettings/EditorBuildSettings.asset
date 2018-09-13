@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Levels/CombatSandbox.unity
     guid: 9817d5f081ba8bd439fca22b02d9aa8d
+  - enabled: 1
+    path: Assets/_Levels/Game.unity
+    guid: f48bf43ecb06f944fa1278bb3c04ad03
   m_configObjects: {}
