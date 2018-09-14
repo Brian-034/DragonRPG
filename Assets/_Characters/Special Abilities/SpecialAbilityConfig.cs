@@ -22,6 +22,7 @@ namespace RPG.Characters
 
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
+        [SerializeField] GameObject particalPrefab;
 
         protected ISpecialAbility behaviour;
 
@@ -35,6 +36,12 @@ namespace RPG.Characters
         public float GetEnergyCost()
         {
             return energyCost;
+        }
+     
+    
+        public GameObject GetParticalPrefab()
+        {
+            return particalPrefab;
         }
 
     }

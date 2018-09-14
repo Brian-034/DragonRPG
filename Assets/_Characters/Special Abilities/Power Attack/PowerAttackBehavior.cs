@@ -20,10 +20,24 @@ namespace RPG.Characters
 
         public void Use(AbilityUseParams useParams)
         {
-            print("Power attack by" + gameObject.name);
-            float totalDamage = config.GetExtraDamage() + useParams.baseDamage;
-            useParams.target.TakeDamage(totalDamage);
+            DealDamage(useParams);
+            PlayParticalEffect();
         }
+
+        private void DealDamage(AbilityUseParams useParams)
+        {
+            float totalDamage = config.GetExtraDamage() + useParams.baseDamage;
+            useParams.target.UpdateHealth(totalDamage);
+        }
+
+        private void PlayParticalEffect()
+        {
+            var prefab = Instantiate(config.GetParticalPrefab(), transform.position, Quaternion.identity);
+            ParticleSystem myParticalSystem = prefab.GetComponent<ParticleSystem>();
+            myParticalSystem.Play();
+            Destroy(prefab, myParticalSystem.main.duration);
+        }
+
     }
 
 }

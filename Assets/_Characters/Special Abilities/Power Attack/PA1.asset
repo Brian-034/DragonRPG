@@ -11,5 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460a484309d6eb345960a2555f88c5b5, type: 3}
   m_Name: PA1
   m_EditorClassIdentifier: 
-  energyCost: 25
-  extraDamage: 50
+  energyCost: 20
+  particalPrefab: {fileID: 1244240399471878, guid: eeb0a3e6c298d6f4c988e67179112ae8,
+    type: 2}
+  extraDamage: 20

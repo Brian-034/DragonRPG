@@ -8,9 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47a040772bce494c8bb478fd48b91d6, type: 3}
-  m_Name: AreaEffect1
+  m_Script: {fileID: 11500000, guid: 460a484309d6eb345960a2555f88c5b5, type: 3}
+  m_Name: PA2
   m_EditorClassIdentifier: 
-  energyCost: 10
-  Radius: 10
-  damageToEachTarget: 10
+  energyCost: 30
+  particalPrefab: {fileID: 1919462209166482, guid: e66071189891c0648b8c2d450ec1af78,
+    type: 2}
+  extraDamage: 10

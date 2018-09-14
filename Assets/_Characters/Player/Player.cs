@@ -26,27 +26,67 @@ namespace RPG.Characters
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
 
-        AudioSource audioSource;
-        Animator animator;
-        float currentHealthPoints;
-        CameraRaycaster cameraRaycaster;
+        AudioSource audioSource = null;
+        Animator animator = null;
+        float currentHealthPoints = 0f;
+        CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
-        Energy energy;
+        Energy energy = null;
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+
             RegisterForMouseClick();
-            SetCurentHealth();
+            SetStartingHealth();
             PutWeaponInHand();
             SetupRuntimeAnimator();
             abilities[0].AttachComponentTo(gameObject);
-            audioSource = GetComponent<AudioSource>();
+          
          }
 
+        private void AttachInitialAbilities()
+        {
+            for( int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
+            {
+                abilities[abilityIndex].AttachComponentTo(gameObject);
+            }
+        }
+
+        public void Update()
+        {
+            if (healthAsPercentage > Mathf.Epsilon)
+            {
+                ScanForAbilityKeyDown();
+            }
+        }
+
+        private void ScanForAbilityKeyDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        public float UpdateCurrentHealth
+        {
+            get{
+                return currentHealthPoints;
+            }
+            set{
+                if (value <= maxHealthPoints)
+                {
+                    currentHealthPoints = value;
+                }
+                else
+                {
+                    currentHealthPoints = maxHealthPoints;
+                }
+
+            }
+        }
        
-        private void SetCurentHealth()
+        private void SetStartingHealth()
         {
             currentHealthPoints = maxHealthPoints;
         }
@@ -121,12 +161,12 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.TakeDamage(baseDamage);
+                enemy.UpdateHealth(baseDamage);
                 lastHitTime = Time.time;
             }
         }
 
-        public void TakeDamage(float damage)
+        public void UpdateHealth(float damage)
         {
             bool playerDies = (currentHealthPoints - damage <= 0);
             ReduceHealth(damage);
