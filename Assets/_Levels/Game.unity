@@ -4928,7 +4928,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.117
+  m_Volume: 0.935
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5056,9 +5056,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d8ebd69df9a3216469749910a4074e81, type: 3}
   - {fileID: 8300000, guid: 2489f4640dc561643a4aabc3d754a8bd, type: 3}
   abilities:
+  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
+  - {fileID: 11400000, guid: 9818ad5fd98bcb44992ab8ef215e60b9, type: 2}
   - {fileID: 11400000, guid: 9064a63047f05054aa6fa67fefbea03b, type: 2}
-  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
-  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
 --- !u!114 &1260312607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6408,6 +6408,11 @@ Prefab:
     - target: {fileID: 4283510136544572, guid: 0792348ceea93f64cb7dbf87e58b11ab, type: 2}
       propertyPath: m_LocalPosition.x
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 81898678476864740, guid: 0792348ceea93f64cb7dbf87e58b11ab,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114471681683313962, guid: 0792348ceea93f64cb7dbf87e58b11ab, type: 2}
@@ -7830,7 +7835,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 3
   m_TerrainData: {fileID: 15600000, guid: cbbadeca1cb5afe4d950d7a2ca456385, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 2000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50

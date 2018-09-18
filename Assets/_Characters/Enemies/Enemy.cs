@@ -63,7 +63,7 @@ namespace RPG.Characters
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
-        public void UpdateHealth(float damage)
+        public void takeDamage(float damage)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             if (currentHealthPoints <= 0)

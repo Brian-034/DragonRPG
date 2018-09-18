@@ -14,4 +14,5 @@ MonoBehaviour:
   energyCost: 20
   particalPrefab: {fileID: 1244240399471878, guid: eeb0a3e6c298d6f4c988e67179112ae8,
     type: 2}
+  audioClip: {fileID: 8300000, guid: d71ac4b09e6676f41a15cd5e70199303, type: 3}
   extraDamage: 20

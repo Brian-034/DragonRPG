@@ -21,11 +21,12 @@ namespace RPG.Characters
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
 
-        [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
 
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
 
+        Enemy currentEnemy = null;
         AudioSource audioSource = null;
         Animator animator = null;
         float currentHealthPoints = 0f;
@@ -43,7 +44,7 @@ namespace RPG.Characters
             SetStartingHealth();
             PutWeaponInHand();
             SetupRuntimeAnimator();
-            abilities[0].AttachComponentTo(gameObject);
+            AttachInitialAbilities();
           
          }
 
@@ -65,7 +66,14 @@ namespace RPG.Characters
 
         private void ScanForAbilityKeyDown()
         {
-            throw new NotImplementedException();
+            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++)
+            {
+                if (Input.GetKeyDown(keyIndex.ToString()))
+                {
+                    AttemptSpecialAblity(keyIndex);
+                }
+            }
+           
         }
 
         public float UpdateCurrentHealth
@@ -125,18 +133,19 @@ namespace RPG.Characters
 
        void OnMouseOverEnemy(Enemy enemy)
         {
+            currentEnemy = enemy;
             if (Input.GetMouseButton(0) && IsTargetInRamge(enemy.gameObject))
             {
-                AttackTarget(enemy);
+                AttackTarget();
             }
            else if (Input.GetMouseButtonDown(1) && IsTargetInRamge(enemy.gameObject)) //bjc
             {
-                AttemptSpecialAblity(0, enemy);
+                AttemptSpecialAblity(0);
              }
 
         }
 
-        private void AttemptSpecialAblity(int abilityIndex, Enemy enemy)
+        private void AttemptSpecialAblity(int abilityIndex)
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
@@ -144,7 +153,7 @@ namespace RPG.Characters
             if (energyComponent.IsEnergyAvailable(energyCost))
             {
                 energyComponent.ConsumeEnergy(energyCost);
-                var abilityParams = new AbilityUseParams(enemy, baseDamage);
+                var abilityParams = new AbilityUseParams(currentEnemy, baseDamage);
                 abilities[abilityIndex].Use(abilityParams);
             }
         }
@@ -156,31 +165,31 @@ namespace RPG.Characters
            
         }
 
-        private void AttackTarget(Enemy enemy)
+        private void AttackTarget()
         {          
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.UpdateHealth(baseDamage);
+                currentEnemy.takeDamage(baseDamage);
                 lastHitTime = Time.time;
             }
         }
 
-        public void UpdateHealth(float damage)
+        public void takeDamage(float damage)
         {
-            bool playerDies = (currentHealthPoints - damage <= 0);
-            ReduceHealth(damage);
-             if (playerDies)
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
+            audioSource.Play();
+
+            if (currentHealthPoints <= 0)
             {
                 StartCoroutine(KillPlayer());
             }
         }
 
-        private void ReduceHealth(float damage)
+        public void Heal(float points)
         {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
-            audioSource.Play();
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
 
         }
 

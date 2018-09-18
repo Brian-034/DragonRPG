@@ -7,27 +7,30 @@ namespace RPG.Characters
     public class PowerAttackBehavior : MonoBehaviour, ISpecialAbility
     {
         PowerAttackConfig config;
+        AudioSource audioSource;
+
+        public void Start()
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
 
         public void SetConfig(PowerAttackConfig configToSet)
         {
             this.config = configToSet;
         }
-        // Use this for initialization
-        void Start()
-        {
-           // print("Power attack behaviou on " + gameObject.name);
-        }
-
+ 
         public void Use(AbilityUseParams useParams)
         {
             DealDamage(useParams);
+            PlaySound();
             PlayParticalEffect();
         }
 
         private void DealDamage(AbilityUseParams useParams)
         {
             float totalDamage = config.GetExtraDamage() + useParams.baseDamage;
-            useParams.target.UpdateHealth(totalDamage);
+            useParams.target.takeDamage(totalDamage);
         }
 
         private void PlayParticalEffect()
@@ -37,6 +40,13 @@ namespace RPG.Characters
             myParticalSystem.Play();
             Destroy(prefab, myParticalSystem.main.duration);
         }
+
+        private void PlaySound()
+        {
+            audioSource.clip = config.GetAudioClip();
+            audioSource.Play();
+        }
+
 
     }
 

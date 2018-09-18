@@ -10,7 +10,7 @@ namespace RPG.Characters
     {
 
         AreaEffectConfig config;
-       
+        AudioSource audioSource;
 
         public void SetConfig(AreaEffectConfig configToSet)
         {
@@ -19,7 +19,8 @@ namespace RPG.Characters
         // Use this for initialization
         void Start()
         {
-           //  print("Area Effect behaviou Attaced to " + gameObject.name);
+             audioSource = gameObject.GetComponent<AudioSource>();
+             audioSource.playOnAwake = false;
         }
 
         public void Use(AbilityUseParams useParams)
@@ -32,6 +33,7 @@ namespace RPG.Characters
         {
             var prefab = Instantiate(config.GetParticalPrefab(),transform.position,Quaternion.identity);
             ParticleSystem myParticalSystem = prefab.GetComponent<ParticleSystem>();
+            PlaySound();
             myParticalSystem.Play();
             Destroy(prefab, myParticalSystem.main.duration);
          }
@@ -48,13 +50,21 @@ namespace RPG.Characters
             foreach (RaycastHit hit in hits)
             {
                 var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
-                if (damageable != null)
+                bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+                if (damageable != null && !hitPlayer)
                 {
                     float totalDamage = config.GetDamageToEachTarget() + useParams.baseDamage;
-                    damageable.UpdateHealth(totalDamage);
+                    damageable.takeDamage(totalDamage);
                 }
             }
         }
+
+        private void PlaySound()
+        {
+            audioSource.clip = config.GetAudioClip();
+            audioSource.Play();
+        }
+
     }
 }
 

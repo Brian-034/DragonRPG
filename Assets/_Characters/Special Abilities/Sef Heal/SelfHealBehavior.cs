@@ -9,18 +9,19 @@ namespace RPG.Characters
     {
 
         SelfHealConfig config;
+        AudioSource audioSource;
 
+        public void Start()
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
 
         public void SetConfig(SelfHealConfig configToSet)
         {
             this.config = configToSet;
         }
-        // Use this for initialization
-        void Start()
-        {
-              print("Self Heal behaviour Attaced to " + gameObject.name);
-        }
-
+       
         public void Use(AbilityUseParams useParams)
         {
             IncreaseHealth(useParams);
@@ -30,6 +31,7 @@ namespace RPG.Characters
         private void PlayParticalEffect()
         {
             var prefab = Instantiate(config.GetParticalPrefab(), transform.position, Quaternion.identity);
+            prefab.transform.parent = transform;
             ParticleSystem myParticalSystem = prefab.GetComponent<ParticleSystem>();
             myParticalSystem.Play();
             Destroy(prefab, myParticalSystem.main.duration);
@@ -37,12 +39,15 @@ namespace RPG.Characters
 
         private void IncreaseHealth(AbilityUseParams useParams)
         {
+            PlaySound();
             var player = GetComponent<Player>();
-            float currentHealth = player.UpdateCurrentHealth + config.GetExtraHealth();
-           // player.UpdateCurrentHealth = currentHealth;
+            player.Heal(config.GetExtraHealth());
+        }
 
-            player.UpdateHealth(-config.GetExtraHealth());
-            print("Self Heal Increase Health " + currentHealth);
+        private void PlaySound()
+        {
+            audioSource.clip = config.GetAudioClip();
+            audioSource.Play();
         }
     }
 }
