@@ -6,7 +6,7 @@ using System;
 
 namespace RPG.Characters
 {
-    public class AreaEffectBehavior : MonoBehaviour, ISpecialAbility
+    public class AreaEffectBehavior : AbilityBehavior
     {
 
         AreaEffectConfig config;
@@ -23,7 +23,7 @@ namespace RPG.Characters
              audioSource.playOnAwake = false;
         }
 
-        public void Use(AbilityUseParams useParams)
+        public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
             PlayParticalEffect();
@@ -31,7 +31,8 @@ namespace RPG.Characters
 
         private void PlayParticalEffect()
         {
-            var prefab = Instantiate(config.GetParticalPrefab(),transform.position,Quaternion.identity);
+            var particalePrefab = config.GetParticalPrefab();
+            var prefab = Instantiate(particalePrefab, transform.position, particalePrefab.transform.rotation);
             ParticleSystem myParticalSystem = prefab.GetComponent<ParticleSystem>();
             PlaySound();
             myParticalSystem.Play();

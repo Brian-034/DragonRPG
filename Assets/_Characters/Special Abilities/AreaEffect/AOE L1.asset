@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: AOE L1
   m_EditorClassIdentifier: 
   energyCost: 20
-  particalPrefab: {fileID: 1071584824700594, guid: a24edb7987dac154a8704729865e456f,
+  particalPrefab: {fileID: 1680882614922438, guid: c7f65442c58181843825ba38fc9e7ef4,
     type: 2}
   audioClip: {fileID: 8300000, guid: d71ac4b09e6676f41a15cd5e70199303, type: 3}
   Radius: 5

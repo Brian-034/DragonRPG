@@ -64,12 +64,13 @@
      <Compile Include="Assets\_Characters\Player\PlayerHealthBar.cs" />
      <Compile Include="Assets\_Characters\Player\PlayerMovement.cs" />
      <Compile Include="Assets\_Characters\Special Abilities\AbbilityConfig.cs" />
+     <Compile Include="Assets\_Characters\Special Abilities\AbilityBehavior.cs" />
      <Compile Include="Assets\_Characters\Special Abilities\AreaEffect\AreaEffectBehavior.cs" />
      <Compile Include="Assets\_Characters\Special Abilities\AreaEffect\AreaEffectConfig.cs" />
      <Compile Include="Assets\_Characters\Special Abilities\Power Attack\PowerAttackBehavior.cs" />
      <Compile Include="Assets\_Characters\Special Abilities\Power Attack\PowerAttackConfig.cs" />
-     <Compile Include="Assets\_Characters\Special Abilities\Sef Heal\SelfHealBehavior.cs" />
-     <Compile Include="Assets\_Characters\Special Abilities\Sef Heal\SelfHealConfig.cs" />
+     <Compile Include="Assets\_Characters\Special Abilities\Self Heal\SelfHealBehavior.cs" />
+     <Compile Include="Assets\_Characters\Special Abilities\Self Heal\SelfHealConfig.cs" />
      <Compile Include="Assets\_Characters\ThirdPersonCharacter.cs" />
      <Compile Include="Assets\_Core\IDamageable.cs" />
      <Compile Include="Assets\_Core\SpinMe.cs" />
@@ -88,7 +89,7 @@
      <Compile Include="Assets\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
      <Compile Include="Assets\GE Common Assets\Scripts\GE_UIResponder.cs" />
      <None Include="Assets\_Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\Asset Packs - For Students\SimpleFX - Synty\Materials\UnlitVertexColour_Alpha.shader" />
+     <None Include="Assets\_Characters\Special Abilities\Materials\UnlitVertexColour_Alpha.shader" />
      <None Include="Assets\_Environment\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\_Environment\Village\FXWaterPro.shader" />
      <None Include="Assets\GE Common Assets\Readme.txt" />

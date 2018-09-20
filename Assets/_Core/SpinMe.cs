@@ -18,7 +18,7 @@ namespace RGP.Core
             // degrees frame^-1 = seconds frame^-1 / seconds minute^-1 * degrees rotation^-1 * rotation minute^-1
             // degrees frame^-1 = frame^-1 minute * degrees rotation^-1 * rotation minute^-1
             // degrees frame^-1 = frame^-1 * degrees
-
+          
             float xDegreesPerFrame = Time.deltaTime / 60 * 360 * xRotationsPerMinute;
             transform.RotateAround(transform.position, transform.right, xDegreesPerFrame);
 

@@ -20,12 +20,16 @@ namespace RPG.Characters
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
+        [Range(0.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
+        [SerializeField] float criticalHitMultiplier = 1.25f;
 
         [SerializeField] AbilityConfig[] abilities;
+        [SerializeField] ParticleSystem criticalHiPartical = null;
 
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
 
+        
         Enemy currentEnemy = null;
         AudioSource audioSource = null;
         Animator animator = null;
@@ -39,7 +43,6 @@ namespace RPG.Characters
         void Start()
         {
             audioSource = GetComponent<AudioSource>();
-
             RegisterForMouseClick();
             SetStartingHealth();
             PutWeaponInHand();
@@ -72,8 +75,7 @@ namespace RPG.Characters
                 {
                     AttemptSpecialAblity(keyIndex);
                 }
-            }
-           
+            }           
         }
 
         public float UpdateCurrentHealth
@@ -90,7 +92,6 @@ namespace RPG.Characters
                 {
                     currentHealthPoints = maxHealthPoints;
                 }
-
             }
         }
        
@@ -170,9 +171,21 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                currentEnemy.takeDamage(baseDamage);
+                currentEnemy.takeDamage(CalculateDamage());
                 lastHitTime = Time.time;
             }
+        }
+
+        private float CalculateDamage()
+        {
+            float totalDamage = baseDamage + weaponInUse.GetAdditionalDamage();
+            bool isCriticalHit = UnityEngine.Random.Range(0, 1f) <= criticalHitChance;
+            if (isCriticalHit)
+            {
+                totalDamage *= criticalHitMultiplier;
+                criticalHiPartical.Play();
+            }
+             return totalDamage;
         }
 
         public void takeDamage(float damage)
