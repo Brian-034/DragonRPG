@@ -174,13 +174,12 @@ GameObject:
   - component: {fileID: 95624658660283122}
   - component: {fileID: 54088648731889886}
   - component: {fileID: 136809023168024526}
-  - component: {fileID: 114834361368349848}
   - component: {fileID: 195171615376599926}
   - component: {fileID: 114220238630198244}
-  - component: {fileID: 114539644739478522}
   - component: {fileID: 114413587100065256}
   - component: {fileID: 114631479631010618}
   - component: {fileID: 82855760691661262}
+  - component: {fileID: 114615227190144684}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -798,10 +797,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520066841264898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dacf3301027c99489a72f96787c08d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  stoppingDistance: 1
+  moveSpeedMultiplyer: 1
+  animationSpeedMultiplier: 1.5
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
+  moveThreshold: 1
 --- !u!114 &114413587100065256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -813,31 +817,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9268856d129aa64a8ab4590ce181c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 800
   baseDamage: 20
   currentWeaponConfig: {fileID: 11400000, guid: 42b20c93823e4e345ab656322c4f0316,
     type: 2}
   animatorOverrideController: {fileID: 22100000, guid: dccdb2e2534dec14994b5512b04f67a2,
     type: 2}
-  damageSounds:
-  - {fileID: 8300000, guid: fe2d9c0c96515ea43849abccdfc3c9cc, type: 3}
-  - {fileID: 8300000, guid: ce0eacf16b36a3a46b6b356693ef367f, type: 3}
-  - {fileID: 8300000, guid: 555e70381223ec6499cac890627f118a, type: 3}
-  - {fileID: 8300000, guid: 6d53d5d98edae374fbb12c261a4d6ab9, type: 3}
-  - {fileID: 8300000, guid: 72204e9a8b3c08342b5434e05498dd3a, type: 3}
-  - {fileID: 8300000, guid: 0c9e2c97961adf84a83b5dac7d7d655d, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: f8a93b3bb3d835543886d31e0f93dc03, type: 3}
-  - {fileID: 8300000, guid: d8ebd69df9a3216469749910a4074e81, type: 3}
-  - {fileID: 8300000, guid: 2489f4640dc561643a4aabc3d754a8bd, type: 3}
   criticalHitChance: 0.1
   criticalHitMultiplier: 1.25
-  abilities:
-  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
-  - {fileID: 11400000, guid: 9818ad5fd98bcb44992ab8ef215e60b9, type: 2}
-  - {fileID: 11400000, guid: 9064a63047f05054aa6fa67fefbea03b, type: 2}
   criticalHiPartical: {fileID: 198590175308001848}
---- !u!114 &114539644739478522
+--- !u!114 &114615227190144684
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -845,9 +833,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520066841264898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb75cb33cc6f884db40fe6cec105d9e, type: 3}
+  m_Script: {fileID: 11500000, guid: a7a27d28993b7d143bd61be79244d5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  healthBar: {fileID: 0}
+  damageSounds: []
+  deathSounds: []
+  deathVanishSeconds: 2
 --- !u!114 &114631479631010618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -859,9 +852,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26578b0367858154ba13f8d3875ba1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyOrb: {fileID: 0}
+  abilities:
+  - {fileID: 11400000, guid: 0b5c53d389b548848a2a2cf0bf4fe45a, type: 2}
+  - {fileID: 11400000, guid: 9818ad5fd98bcb44992ab8ef215e60b9, type: 2}
+  - {fileID: 11400000, guid: 9064a63047f05054aa6fa67fefbea03b, type: 2}
+  energyBar: {fileID: 0}
   maxEnergyPoints: 100
   regenPointsPerSecond: 3
+  OutOfEnergy: {fileID: 8300000, guid: bfde5d56bf262774ba213398270f3bb1, type: 3}
 --- !u!114 &114730543853140524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -873,25 +871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727bef188f175a2448212b8071313e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114834361368349848
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1520066841264898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 1000
-  m_StationaryTurnSpeed: 500
-  m_JumpPower: 6
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1.7
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 1.2
 --- !u!136 &136809023168024526
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Core;
 using System;
 
 namespace RPG.Characters
@@ -9,14 +8,14 @@ namespace RPG.Characters
     public class AreaEffectBehavior : AbilityBehavior
     {
        
-        public override void Use(AbilityUseParams useParams)
+        public override void Use(GameObject targets)
         {
-            DealRadialDamage(useParams);
+            DealRadialDamage();
             PlayParticalEffect();
             PlayAbilitySound();
         }
 
-             private void DealRadialDamage(AbilityUseParams useParams)
+             private void DealRadialDamage()
         {
              // Static sphere cast for targets
                RaycastHit[] hits = Physics.SphereCastAll(
@@ -27,12 +26,12 @@ namespace RPG.Characters
                );
             foreach (RaycastHit hit in hits)
             {
-                var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
+                var damageable = hit.collider.gameObject.GetComponent<HealthSystem>();
                 bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
                 if (damageable != null && !hitPlayer)
                 {
-                    float totalDamage = (config as AreaEffectConfig).GetDamageToEachTarget() + useParams.baseDamage;
-                    damageable.takeDamage(totalDamage);
+                    float totalDamage = (config as AreaEffectConfig).GetDamageToEachTarget();
+                    damageable.TakeDamage(totalDamage);
                 }
             }
         }

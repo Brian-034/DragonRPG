@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 342}
-  m_MaxSize: {x: 12008, y: 8042}
+  m_MinSize: {x: 713, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 52
+  controlID: 53
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -156,10 +156,10 @@ MonoBehaviour:
     y: 0
     width: 1238
     height: 947
-  m_MinSize: {x: 204, y: 342}
-  m_MaxSize: {x: 4004, y: 8042}
+  m_MinSize: {x: 234, y: 492}
+  m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 53
+  controlID: 54
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,15 +206,15 @@ MonoBehaviour:
     y: 676
     width: 1238
     height: 271
-  m_MinSize: {x: 104, y: 121}
-  m_MaxSize: {x: 4004, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 234, y: 271}
+  m_MaxSize: {x: 10004, y: 10021}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -348,9 +348,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: da41deff36c0fffff8daffff46e1ffffe6fbffff00000000323b0000223d0000
+    m_SelectedIDs: 583c0000
+    m_LastClickedID: 15448
+    m_ExpandedIDs: 46e1ffffe6fbffff00000000323b0000f03b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -400,14 +400,14 @@ MonoBehaviour:
     height: 655
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 9818.137905180889
+  lastFramingTime: 4199.525140286923
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.3839874, y: 1.486084, z: 0.109375}
+    m_Target: {x: 92.59717, y: 1.8515625, z: -79.109375}
     speed: 2
-    m_Value: {x: -7.3839874, y: 1.486084, z: 0.109375}
+    m_Value: {x: 92.59717, y: 1.8515625, z: -79.109375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -435,13 +435,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.17841542, y: 0.015341502, z: -0.00278278, w: -0.98383266}
+    m_Target: {x: -0.17841543, y: 0.015341503, z: -0.00278278, w: -0.9838327}
     speed: 2
-    m_Value: {x: -0.17841543, y: 0.015341503, z: -0.00278278, w: -0.9838327}
+    m_Value: {x: -0.17841527, y: 0.015341488, z: -0.0027827774, w: -0.98383176}
   m_Size:
-    m_Target: 3.7303758
+    m_Target: 98.10846
     speed: 2
-    m_Value: 3.7303758
+    m_Value: 98.10846
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_AnimEditor: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -9480
+  m_LastSelectedObjectID: 15668
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -544,20 +544,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Characters/Player
+    - Assets/_Characters/Special Abilities
   m_ViewMode: 1
   m_StartGridSize: 70
   m_LastFolders:
-  - Assets/_Characters/Player
+  - Assets/_Characters/Special Abilities
   m_LastFoldersGridSize: 70
   m_LastProjectPath: E:\Repos\Unity\DragonRGGV2-master\DragonRPG
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 127}
-    m_SelectedIDs: c8240000
-    m_LastClickedID: 9416
-    m_ExpandedIDs: 000000001c0a00000c0d0000281b0000861c0000222000003a2200005e230000082f00007032000074340000e03700004839000084390000686800006a6800006c6800006e68000070680000726800007468000076680000786800007a6800007c6800007e68000080680000826800008468000086680000886800008a6800008c6800008e68000090680000926800009468000096680000986800009a6800009c6800009e68000000ca9a3b
+    scrollPos: {x: 0, y: 179}
+    m_SelectedIDs: cc350000
+    m_LastClickedID: 13772
+    m_ExpandedIDs: 000000001a0a00000a0d0000281b00008a1c0000262000003e220000622300000c2f00007432000078340000cc3500004a3900008639000090680000926800009468000096680000986800009a6800009c6800009e680000a0680000a2680000a4680000a6680000a8680000aa680000ac680000ae680000b0680000b2680000b4680000b6680000b8680000ba680000bc680000be680000c0680000c2680000c4680000c668000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -585,7 +585,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e428fdff
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c0a00000c0d0000fa190000f61a0000281b0000861c0000222000003a2200005e230000082f00007032000074340000c8350000e03700004839000084390000686800006a6800006c6800006e68000070680000726800007468000076680000786800007a6800007c6800007e68000080680000826800008468000086680000886800008a6800008c6800008e68000090680000926800009468000096680000986800009a6800009c6800009e680000
+    m_ExpandedIDs: 000000001a0a00000a0d0000281b00008a1c0000262000003e220000622300000c2f00007432000078340000cc3500004a3900008639000090680000926800009468000096680000986800009a6800009c6800009e680000a0680000a2680000a4680000a6680000a8680000aa680000ac680000ae680000b0680000b2680000b4680000b6680000b8680000ba680000bc680000be680000c0680000c2680000c4680000c6680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 6e2d00002a0b00001e370000780a00009e090000ce2900009c2b0000ba0d0000380e0000b63200001a0d0000680a0000220c0000ee0e0000280c0000e40e00000c0b00007c0e00005c0d00009e0e0000e00e0000e2330000060a0000880c000078330000160c0000f2090000300c0000689b0300e63300004e0d0000cc100000121900001c2e00002a2f0000a05f0000fa23000062720000c0190000c80b0000000000008e300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -629,7 +629,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 8}
+      m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0

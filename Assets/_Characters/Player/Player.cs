@@ -5,51 +5,42 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using RPG.CameraUI;
-using RPG.Core;
 
 namespace RPG.Characters
 {
-    public class Player : MonoBehaviour, IDamageable
+    public class Player : MonoBehaviour
     {
 
-        [SerializeField] float maxHealthPoints = 100f;
         [SerializeField] float baseDamage = 10f;
      
         [SerializeField] Weapon currentWeaponConfig = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
-        [SerializeField] AudioClip[] damageSounds;
-        [SerializeField] AudioClip[] deathSounds;
-        [Range(0.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
+         [Range(0.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
         [SerializeField] float criticalHitMultiplier = 1.25f;
 
-        [SerializeField] AbilityConfig[] abilities;
-        [SerializeField] ParticleSystem criticalHiPartical = null;
+         [SerializeField] ParticleSystem criticalHiPartical = null;
 
-        const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
         
         Enemy currentEnemy = null;
-        AudioSource audioSource = null;
+
         Animator animator = null;
-        float currentHealthPoints = 0f;
+        SpecialAbilities abilities;
+
         CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
-        Energy energy = null;
+        SpecialAbilities energy = null;
         GameObject weaponObject;
 
-        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
         void Start()
         {
-            audioSource = GetComponent<AudioSource>();
+            abilities = GetComponent<SpecialAbilities>();
             RegisterForMouseClick();
-            SetStartingHealth();
             PutWeaponInHand(currentWeaponConfig);
-            SetAttackAnimation();
-            AttachInitialAbilities();
-          
-         }
+            SetAttackAnimation();        
+        }
 
         public void PutWeaponInHand(Weapon weaponToUse)
         {
@@ -61,18 +52,11 @@ namespace RPG.Characters
             weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
             weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
         }
-
-        private void AttachInitialAbilities()
-        {
-            for( int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
-            {
-                abilities[abilityIndex].AttachAbilityTo(gameObject);
-            }
-        }
-
+ 
         public void Update()
         {
-            if (healthAsPercentage > Mathf.Epsilon)
+            var healthPercent = GetComponent<HealthSystem>().healthAsPercentage;
+            if (healthPercent > Mathf.Epsilon)
             {
                 ScanForAbilityKeyDown();
             }
@@ -80,37 +64,15 @@ namespace RPG.Characters
 
         private void ScanForAbilityKeyDown()
         {
-            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++)
+            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
             {
                 if (Input.GetKeyDown(keyIndex.ToString()))
                 {
-                    AttemptSpecialAblity(keyIndex);
+                    abilities.AttemptSpecialAblity(keyIndex);
                 }
             }           
         }
-
-        public float UpdateCurrentHealth
-        {
-            get{
-                return currentHealthPoints;
-            }
-            set{
-                if (value <= maxHealthPoints)
-                {
-                    currentHealthPoints = value;
-                }
-                else
-                {
-                    currentHealthPoints = maxHealthPoints;
-                }
-            }
-        }
-       
-        private void SetStartingHealth()
-        {
-            currentHealthPoints = maxHealthPoints;
-        }
-
+     
         private void SetAttackAnimation()
         {
             animator = GetComponent<Animator>();
@@ -143,22 +105,9 @@ namespace RPG.Characters
             }
            else if (Input.GetMouseButtonDown(1) && IsTargetInRamge(enemy.gameObject)) //bjc
             {
-                AttemptSpecialAblity(0);
+                abilities.AttemptSpecialAblity(0, enemy.gameObject);
              }
 
-        }
-
-        private void AttemptSpecialAblity(int abilityIndex)
-        {
-            var energyComponent = GetComponent<Energy>();
-            var energyCost = abilities[abilityIndex].GetEnergyCost();
-
-            if (energyComponent.IsEnergyAvailable(energyCost))
-            {
-                energyComponent.ConsumeEnergy(energyCost);
-                var abilityParams = new AbilityUseParams(currentEnemy, baseDamage);
-                abilities[abilityIndex].Use(abilityParams);
-            }
         }
 
         private bool IsTargetInRamge(GameObject target)
@@ -190,34 +139,6 @@ namespace RPG.Characters
             }
              return totalDamage;
         }
-
-        public void takeDamage(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
-            audioSource.Play();
-
-            if (currentHealthPoints <= 0)
-            {
-                StartCoroutine(KillPlayer());
-            }
-        }
-
-        public void Heal(float points)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
-
-        }
-
-        IEnumerator KillPlayer()
-        {
-            animator.SetTrigger(DEATH_TRIGGER);
-
-            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-            audioSource.Play();
-            yield return new WaitForSecondsRealtime(audioSource.clip.length + 1f);
-
-            SceneManager.LoadScene(0);
-        }
-    }
+  
+      }
 }

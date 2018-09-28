@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Core;
 
 namespace RPG.Characters
 {
@@ -41,12 +40,12 @@ namespace RPG.Characters
 
         private void DamageDamageblObjects(Collision collision)
         {
-            Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
-            if (damageableComponent)
-            {
-                (damageableComponent as IDamageable).takeDamage(damageCaused);
-            }
-            Destroy(gameObject, DESTROY_DELAY);
+        //    Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
+        //    if (damageableComponent)
+        //    {
+        //        (damageableComponent as IDamageable).takeDamage(damageCaused);
+        //    }
+        //    Destroy(gameObject, DESTROY_DELAY);
         }
     }
 }

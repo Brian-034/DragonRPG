@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using RPG.Core;
 
 namespace RPG.Characters
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour
     {
-        [SerializeField] float maxHealthPoints = 100f;
         [SerializeField] float attackRadius = 5f;
         [SerializeField] float chaseRadius = 2f;
         [SerializeField] float damagePerShot = 9f;
@@ -15,28 +13,23 @@ namespace RPG.Characters
         [SerializeField] GameObject projectileSocket;
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
-        ThirdPersonCharacter thirdPersonCharacter;
-        AICharacterControl aiCharacterControl;
-        Player player = null;
+         Player player = null;
         bool isAttacking = false;
-        float currentHealthPoints;
+        
 
         void Start()
         {
-            player = FindObjectOfType<Player>();
-            thirdPersonCharacter = player.GetComponent<ThirdPersonCharacter>();
-            aiCharacterControl = gameObject.GetComponent<AICharacterControl>();
-            currentHealthPoints = maxHealthPoints;
+            player = FindObjectOfType<Player>();           
+        }
+
+        public void takeDamage(float amount)
+        {
+            // TODO remove
         }
 
         void Update()
         {
-            if (player.healthAsPercentage <= Mathf.Epsilon)
-            {
-                StopAllCoroutines();
-                Destroy(this);
-            }
-            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+              float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
@@ -52,25 +45,15 @@ namespace RPG.Characters
 
             if (distanceToPlayer < chaseRadius)
             {
-                aiCharacterControl.SetTarget(player.transform);
+                //aiCharacterControl.SetTarget(player.transform);
             }
             else
             {
-                aiCharacterControl.SetTarget(transform);
+                //aiCharacterControl.SetTarget(transform);
             }
         }
 
-        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
-
-        public void takeDamage(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            if (currentHealthPoints <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-
+  
         void SpawnProjectiles()
         {
 
