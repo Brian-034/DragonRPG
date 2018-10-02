@@ -6,11 +6,11 @@ namespace RPG.Characters
 {
     public class SelfHealBehavior : AbilityBehavior
     {
-        Player player;
+        PlayerMovement player;
 
         void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerMovement>();
         }
 
         public override void Use(GameObject target)
