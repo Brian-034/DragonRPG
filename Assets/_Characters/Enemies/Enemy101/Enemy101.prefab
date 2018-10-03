@@ -1983,6 +1983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRadius: 6
+  patrolPath: {fileID: 0}
 --- !u!137 &137373548435912876
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
