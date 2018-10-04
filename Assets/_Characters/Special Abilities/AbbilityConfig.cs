@@ -9,6 +9,7 @@ namespace RPG.Characters
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particalPrefab;
         [SerializeField] AudioClip[] audioClips;
+        [SerializeField] AnimationClip animationClip;
 
         protected AbilityBehavior behaviour;
 
@@ -42,6 +43,10 @@ namespace RPG.Characters
             return audioClips[Random.Range(0,audioClips.Length)];
         }
 
+        public AnimationClip GetAnimationClip()
+        {
+            return animationClip;
+        }
     }
 
 }

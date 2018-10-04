@@ -16,4 +16,5 @@ MonoBehaviour:
     type: 2}
   audioClips:
   - {fileID: 8300000, guid: 654e76906ef6f184aa840f43cebac219, type: 3}
+  animationClip: {fileID: 7400000, guid: 443693849a2f4e741afac059a470e10e, type: 3}
   extraDamage: 20

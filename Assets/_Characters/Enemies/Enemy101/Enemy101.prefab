@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 114622822874090220}
   - component: {fileID: 114042140966578466}
   - component: {fileID: 114871511147839348}
+  - component: {fileID: 114602451657651860}
   m_Layer: 0
   m_Name: Enemy101
   m_TagString: Untagged
@@ -1095,7 +1096,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1658104023441324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.684723, y: 0, z: -4.9919586}
+  m_LocalPosition: {x: -9.7, y: 0, z: 7.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4072924898149174}
@@ -1942,6 +1943,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727bef188f175a2448212b8071313e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114602451657651860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658104023441324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a27d28993b7d143bd61be79244d5b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  healthBar: {fileID: 0}
+  damageSounds:
+  - {fileID: 8300000, guid: ce0eacf16b36a3a46b6b356693ef367f, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: fe2d9c0c96515ea43849abccdfc3c9cc, type: 3}
+  deathVanishSeconds: 1
 --- !u!114 &114622822874090220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1984,6 +2003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRadius: 6
   patrolPath: {fileID: 0}
+  WaypointTolerance: 2
 --- !u!137 &137373548435912876
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -4,6 +4,7 @@ using System;
 
 namespace RPG.Characters
 {
+    [RequireComponent(typeof(HealthSystem))]
     [RequireComponent(typeof(WeaponSystem))]
     [RequireComponent(typeof(Character))]
 
@@ -13,8 +14,9 @@ namespace RPG.Characters
         [SerializeField] float chaseRadius = 2f;
         [SerializeField] WayPointContainer patrolPath;
         [SerializeField] float WaypointTolerance = 2f;
- 
-        PlayerMovement player = null;
+        [SerializeField] float WaypointDwellTime = 2f;
+
+        PlayerControl player = null;
         Character character;
         int nextWaypointIndex;
         float currentWeaponRange = 5f;
@@ -26,7 +28,7 @@ namespace RPG.Characters
         void Start()
         {
             character = GetComponent<Character>();
-            player = FindObjectOfType<PlayerMovement>();           
+            player = FindObjectOfType<PlayerControl>();           
         }
 
         void Update()
@@ -38,29 +40,31 @@ namespace RPG.Characters
             {
                 StopAllCoroutines();
                 StartCoroutine(Patrol());
+                weaponSystem.StopAttacking();
             }
             if (distanceToPlayer <= chaseRadius && state != State.chasing)
             {
                 StopAllCoroutines();
                 StartCoroutine(ChasePlayer());
+                weaponSystem.StopAttacking();
             }
             if(distanceToPlayer <=currentWeaponRange && state != State.attacking)
             {
                 StopAllCoroutines();
-                // start atacking
                 state = State.attacking;
+                weaponSystem.AttackTarget(player.gameObject);
             }
         }
 
         IEnumerator Patrol()
         {
             state = State.patrolling;
-            while (true)
+            while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
                 character.SetDestination(nextWaypointPos);
                 CycleWaypointWhenClose(nextWaypointPos);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(WaypointDwellTime);
             }
           
         }

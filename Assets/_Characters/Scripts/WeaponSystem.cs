@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -20,8 +21,6 @@ namespace RPG.Characters
         float lastHitTime = 0f;
         EnemyAI currentEnemy = null;
 
-
-        // Use this for initialization
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -35,7 +34,30 @@ namespace RPG.Characters
         // Update is called once per frame
         void Update()
         {
+            bool targetIsDead;
+            bool targetIsOutOfRange;
 
+            if (target == null)
+            {
+                targetIsDead = true;
+                targetIsOutOfRange = false;
+            }
+            else
+            {
+                float targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
+                targetIsDead = (targetHealth <= Mathf.Epsilon);
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                float range = currentWeaponConfig.GetMaxAttackRange();
+                targetIsOutOfRange = (distance > range);
+            }
+
+            float characterHealth = GetComponent<HealthSystem>().healthAsPercentage;
+            bool characterIsDead = (characterHealth <= Mathf.Epsilon);
+
+            if (characterIsDead || targetIsOutOfRange || targetIsDead)
+            {
+                StopAllCoroutines();
+            }
         }
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)
@@ -53,8 +75,51 @@ namespace RPG.Characters
         public void AttackTarget(GameObject targetToAttack)
         {
             target = targetToAttack;
+            StartCoroutine(AttackTargetRepeatedly());
             print("Attacking " + target);
 
+        }
+
+        public void StopAttacking()
+        {
+            StopAllCoroutines();
+        }
+
+        IEnumerator AttackTargetRepeatedly()
+        {
+            bool attackerStillAlive = GetComponent<HealthSystem>().healthAsPercentage > 0;
+            bool targetStillAlive = target.GetComponent<HealthSystem>().healthAsPercentage > 0;
+ 
+            while (attackerStillAlive && targetStillAlive)
+            {
+                float weaponHitPeriod = currentWeaponConfig.GetMinTimeBetweenHits();
+                float timeToWait = weaponHitPeriod * character.GetAnimSpeedMultiplier();
+
+                bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
+
+                if (isTimeToHitAgain)
+                {
+                    AttackTargetOnce();
+                    lastHitTime = Time.time;
+                }
+                yield return new WaitForSeconds(timeToWait);
+            }
+          }
+
+        private void AttackTargetOnce()
+        {
+            transform.LookAt(target.transform);
+            animator.SetTrigger(ATTACK_TRIGGER);
+            float damageDelay = 1.0f;
+            SetAttackAnimation();
+            StartCoroutine(DamageAfterDelay(damageDelay));
+
+        }
+
+        IEnumerator DamageAfterDelay(float damageDelay)
+        {
+            yield return new WaitForSecondsRealtime(damageDelay);
+            target.GetComponent<HealthSystem>().TakeDamage(CalculateDamage());
         }
 
         public WeaponConfig GetCurrentWeapon()
@@ -64,11 +129,17 @@ namespace RPG.Characters
 
         private void SetAttackAnimation()
         {
-            animator = GetComponent<Animator>();
-            var animatorOverrideController = character.GetOverrideController();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
-
+            if (!character.GetOverrideController())
+            {
+                Debug.Break();
+                Debug.LogAssertion("Add animator controller to " + gameObject);
+            }
+            else
+            {
+                var animatorOverrideController = character.GetOverrideController();
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            }
         }
 
         private GameObject RequestDominantHand()

@@ -13,6 +13,7 @@ namespace RPG.Characters
             DealRadialDamage();
             PlayParticalEffect();
             PlayAbilitySound();
+            PlayAbilityAnimation();
         }
 
              private void DealRadialDamage()
@@ -27,7 +28,7 @@ namespace RPG.Characters
             foreach (RaycastHit hit in hits)
             {
                 var damageable = hit.collider.gameObject.GetComponent<HealthSystem>();
-                bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerMovement>();
+                bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerControl>();
                 if (damageable != null && !hitPlayer)
                 {
                     float totalDamage = (config as AreaEffectConfig).GetDamageToEachTarget();

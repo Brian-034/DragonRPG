@@ -101,6 +101,11 @@ namespace RPG.Characters
             }
         }
 
+        public float GetAnimSpeedMultiplier()
+        {
+            return animator.speed;
+        }
+
         void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);
@@ -137,7 +142,6 @@ namespace RPG.Characters
             {
                 navMeshAgent.SetDestination(enemy.transform.position);
             }
-
         }
 
 

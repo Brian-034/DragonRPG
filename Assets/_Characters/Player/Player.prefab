@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 114413587100065256}
   - component: {fileID: 114631479631010618}
   - component: {fileID: 114615227190144684}
+  - component: {fileID: 114586160913606910}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -533,7 +534,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520066841264898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.07, y: 0, z: 0}
+  m_LocalPosition: {x: -7.34, y: 0, z: 10.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4252935597607368}
@@ -696,14 +697,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9268856d129aa64a8ab4590ce181c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 20
+--- !u!114 &114586160913606910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520066841264898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3844d3502ee3d9040854a7b7933a8f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
   currentWeaponConfig: {fileID: 11400000, guid: 42b20c93823e4e345ab656322c4f0316,
     type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: dccdb2e2534dec14994b5512b04f67a2,
-    type: 2}
-  criticalHitChance: 0.1
-  criticalHitMultiplier: 1.25
-  criticalHiPartical: {fileID: 198590175308001848}
 --- !u!114 &114615227190144684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -717,8 +724,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 0}
-  damageSounds: []
-  deathSounds: []
+  damageSounds:
+  - {fileID: 8300000, guid: fe2d9c0c96515ea43849abccdfc3c9cc, type: 3}
+  - {fileID: 8300000, guid: ce0eacf16b36a3a46b6b356693ef367f, type: 3}
+  - {fileID: 8300000, guid: 555e70381223ec6499cac890627f118a, type: 3}
+  - {fileID: 8300000, guid: 6d53d5d98edae374fbb12c261a4d6ab9, type: 3}
+  - {fileID: 8300000, guid: 72204e9a8b3c08342b5434e05498dd3a, type: 3}
+  - {fileID: 8300000, guid: 0c9e2c97961adf84a83b5dac7d7d655d, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: f8a93b3bb3d835543886d31e0f93dc03, type: 3}
+  - {fileID: 8300000, guid: d8ebd69df9a3216469749910a4074e81, type: 3}
+  - {fileID: 8300000, guid: 2489f4640dc561643a4aabc3d754a8bd, type: 3}
   deathVanishSeconds: 2
 --- !u!114 &114631479631010618
 MonoBehaviour:

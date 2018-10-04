@@ -50,7 +50,8 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
-            bool characterDies = (currentHealthPoints - damage >= 0);
+           // bool characterDies = (currentHealthPoints - damage >= 0);
+            bool characterDies = (currentHealthPoints - damage <= 0); //bjc
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
             audioSource.PlayOneShot(clip);
@@ -72,7 +73,7 @@ namespace RPG.Characters
             StopAllCoroutines();
             characterMovement.Kill();
             animator.SetTrigger(DEATH_TRIGGER);
-            var playerComponent = GetComponent<PlayerMovement>();
+            var playerComponent = GetComponent<PlayerControl>();
             if (playerComponent && playerComponent.isActiveAndEnabled)
             {
                 audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];

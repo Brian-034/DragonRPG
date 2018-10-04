@@ -42,8 +42,9 @@ namespace RPG.Characters
             Instantiate(weapon, gameObject.transform);
         }
 
-        void OnTriggerEnter()
+        void OnTriggerEnter(Collider collider)
         {
+            print(" Collider" + collider.gameObject.name);
             var player = FindObjectOfType<WeaponSystem>();
             player.PutWeaponInHand(weaponConfig);
             var audioSource = player.GetComponent<AudioSource>();
