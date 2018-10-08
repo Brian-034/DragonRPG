@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 20338169408864780}
   - component: {fileID: 124051341565654092}
   - component: {fileID: 81898678476864740}
-  - component: {fileID: 114471681683313962}
   - component: {fileID: 114083889026358342}
   m_Layer: 0
   m_Name: Main Camera
@@ -53,13 +52,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748525561977032}
-  m_LocalRotation: {x: 0.35441664, y: -0.45508924, z: 0.19959645, w: 0.7921136}
-  m_LocalPosition: {x: 5.2, y: 8.78, z: -3.2}
+  m_LocalRotation: {x: 0.31598538, y: -0.3596048, z: 0.13088542, w: 0.8681629}
+  m_LocalPosition: {x: 8, y: 8, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4581169557807284}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 48, y: -60, z: -0.546}
+  m_LocalEulerAnglesHint: {x: 40, y: -45, z: 0}
 --- !u!4 &4581169557807284
 Transform:
   m_ObjectHideFlags: 1
@@ -67,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1443800712202558}
   m_LocalRotation: {x: -0, y: 0.34841037, z: -0, w: 0.93734217}
-  m_LocalPosition: {x: 37.83, y: 3.0031128, z: -17.18}
+  m_LocalPosition: {x: 30.13, y: 3.0031128, z: -26.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4283510136544572}
@@ -132,23 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 00000000
   walkCursor: {fileID: 2800000, guid: 6aaa95ac56456b3468caac2f0dcc344a, type: 3}
   enemyCursor: {fileID: 2800000, guid: d9c16f1a0df648e45b02934c28754d59, type: 3}
-  cursorHotspot: {x: 0, y: 0}
---- !u!114 &114471681683313962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1748525561977032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f83d710eebbbca438a7ce04015996df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unknownCursor: {fileID: 2800000, guid: 22b0d0abbfc16724fb7d56aac4b6f934, type: 3}
-  targetCursor: {fileID: 2800000, guid: d9c16f1a0df648e45b02934c28754d59, type: 3}
   cursorHotspot: {x: 0, y: 0}
 --- !u!114 &114740760650760254
 MonoBehaviour:

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b2f0b9fabd1914daeb525ef93662fb, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  gripTransform: {fileID: 4507452697665812, guid: 9d346217cc4966b4289a2583bcce2b65,
+    type: 2}
+  weaponPrefab: {fileID: 1118239754697080, guid: ff422c9cbf518cd4fa99e6e27d1719e5,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 522e6e5c331853c46a1b4bf644d62789, type: 3}
+  minTimeBetweenHits: 1.5
+  maxAttackRange: 10
+  additionalDamage: 10
+  damageDelay: 2

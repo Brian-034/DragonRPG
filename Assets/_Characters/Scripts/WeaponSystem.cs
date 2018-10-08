@@ -9,7 +9,7 @@ namespace RPG.Characters
     public class WeaponSystem : MonoBehaviour
     {
         [SerializeField] float baseDamage = 10f;
-        [SerializeField] WeaponConfig currentWeaponConfig = null;
+        [SerializeField] WeaponConfig currentWeaponConfig;
  
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
@@ -62,7 +62,6 @@ namespace RPG.Characters
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)
         {
-            print("put wep in hand " +weaponToUse.name);
             currentWeaponConfig = weaponToUse;
             var weaponPrefab = weaponToUse.GetWeaponPrefab();
             GameObject dominantHand = RequestDominantHand();
@@ -76,26 +75,27 @@ namespace RPG.Characters
         {
             target = targetToAttack;
             StartCoroutine(AttackTargetRepeatedly());
-            print("Attacking " + target);
-
         }
 
         public void StopAttacking()
         {
+            animator.StopPlayback();
             StopAllCoroutines();
         }
 
         IEnumerator AttackTargetRepeatedly()
         {
-            bool attackerStillAlive = GetComponent<HealthSystem>().healthAsPercentage > 0;
-            bool targetStillAlive = target.GetComponent<HealthSystem>().healthAsPercentage > 0;
- 
+            bool attackerStillAlive = ((GetComponent<HealthSystem>().healthAsPercentage) > 0);
+            bool targetStillAlive = ((target.GetComponent<HealthSystem>().healthAsPercentage) > 0);
+            float tHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
+
             while (attackerStillAlive && targetStillAlive)
             {
                 float weaponHitPeriod = currentWeaponConfig.GetMinTimeBetweenHits();
-                float timeToWait = weaponHitPeriod * character.GetAnimSpeedMultiplier();
+                //float timeToWait = weaponHitPeriod * character.GetAnimSpeedMultiplier();
+                float timeToWait = weaponHitPeriod / character.GetAnimSpeedMultiplier(); //bjc
 
-                bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
+                bool isTimeToHitAgain = (Time.time - lastHitTime) > timeToWait;
 
                 if (isTimeToHitAgain)
                 {
@@ -110,7 +110,7 @@ namespace RPG.Characters
         {
             transform.LookAt(target.transform);
             animator.SetTrigger(ATTACK_TRIGGER);
-            float damageDelay = 1.0f;
+            float damageDelay = currentWeaponConfig.GetDamageDelay();
             SetAttackAnimation();
             StartCoroutine(DamageAfterDelay(damageDelay));
 
@@ -118,8 +118,11 @@ namespace RPG.Characters
 
         IEnumerator DamageAfterDelay(float damageDelay)
         {
+    //        print("First Damage afterdelay " + target.name);
+            target.GetComponent<HealthSystem>().TakeDamage(CalculateDamage()); // bjc
             yield return new WaitForSecondsRealtime(damageDelay);
-            target.GetComponent<HealthSystem>().TakeDamage(CalculateDamage());
+  //          print("Damage afterdelay " + target.name);
+   //bjc         target.GetComponent<HealthSystem>().TakeDamage(CalculateDamage());
         }
 
         public WeaponConfig GetCurrentWeapon()

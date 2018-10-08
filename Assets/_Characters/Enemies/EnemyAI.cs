@@ -19,8 +19,8 @@ namespace RPG.Characters
         PlayerControl player = null;
         Character character;
         int nextWaypointIndex;
-        float currentWeaponRange = 5f;
         float distanceToPlayer;
+        float currentWeaponRange =2f;
 
         enum State { idle,patrolling,attacking,chasing}
         State state = State.idle;
@@ -36,19 +36,28 @@ namespace RPG.Characters
             distanceToPlayer = Vector3.Distance(transform.position,player.transform.position );
             WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
-            if (distanceToPlayer > chaseRadius && state != State.patrolling && patrolPath != null)
+
+            bool inWeaponCircle = distanceToPlayer <= currentWeaponRange;
+            bool inChaseRing = distanceToPlayer > currentWeaponRange 
+                                &&  distanceToPlayer <= chaseRadius;
+            bool outsideChaseRadius = distanceToPlayer > chaseRadius;
+
+            if (outsideChaseRadius)
             {
                 StopAllCoroutines();
-                StartCoroutine(Patrol());
                 weaponSystem.StopAttacking();
+                if (patrolPath != null)
+                {
+                    StartCoroutine(Patrol());
+                }            
             }
-            if (distanceToPlayer <= chaseRadius && state != State.chasing)
+            if (inChaseRing)
             {
                 StopAllCoroutines();
                 StartCoroutine(ChasePlayer());
                 weaponSystem.StopAttacking();
             }
-            if(distanceToPlayer <=currentWeaponRange && state != State.attacking)
+            if(inWeaponCircle)
             {
                 StopAllCoroutines();
                 state = State.attacking;

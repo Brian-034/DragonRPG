@@ -44,8 +44,6 @@ namespace RPG.Characters
             animator.runtimeAnimatorController = animatorOverrideController;
             animatorOverrideController[DEFAULT_ATTACK] = config.GetAnimationClip();
             animator.SetTrigger(ATTACK_TRIGGER);
-
-            print("Animating");
         }
         protected void PlayAbilitySound()
         {
